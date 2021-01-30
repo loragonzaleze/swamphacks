@@ -34,6 +34,7 @@ class App extends Component {
             path="/game"
             userId={this.state.userId}
           />
+
           <NotFound default />
         </Router>
       </>
