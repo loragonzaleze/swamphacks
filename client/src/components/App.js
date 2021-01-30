@@ -3,6 +3,7 @@ import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import PvP from "./pages/PvP.js";
 import HomePage from "./pages/HomePage.js";
+import PvE from "./pages/PvE.js";
 
 import "../utilities.css";
 
@@ -32,6 +33,10 @@ class App extends Component {
           />
           <PvP
             path="/game"
+            userId={this.state.userId}
+          />
+          <PvE
+            path="/PvE"
             userId={this.state.userId}
           />
           <NotFound default />
