@@ -6,5 +6,10 @@
     background-size: cover;
 }
 .title{
-    color: chartreuse;
+    color: darkgreen;
+    font-size: 80px;
+    text-align: center;
+    word-wrap: anywhere;
+    font-family: "Fantasy", Jazz LET, fantasy;
 }
+

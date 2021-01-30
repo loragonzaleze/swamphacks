@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import background from './assets/background image.jpg'
+import background from './assets/maxresdefault.jpg'
+import SettingsIcon from './assets/settings-solid.png'
 import "./HomePage.css"
+import {AwesomeButton} from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
 
 
 class HomePage extends Component {
+  fixed;
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -25,15 +29,27 @@ class HomePage extends Component {
         <div className = "title">
           Rumble in the Swamp!
         </div>
-        <div >
+        <AwesomeButton  type="primary"
+                        style = {{position:this.fixed, left: 680, top: 300}}
+                       onPress={() =>
+                       {}
+                       }
+        >Play</AwesomeButton>
+        <AwesomeButton type="primary"
+                        style = {{position:this.fixed, left: 0, top: 400, backgroundImage: `url(${SettingsIcon})`}}
+                        onPress={() =>
+                        {}
+                        }
+        > </AwesomeButton>
 
-        </div>
-
-
-
-
+        <AwesomeButton type="primary"
+                              style = {{position:this.fixed, left: 1050, top: 400 }}
+                              onPress={() =>
+                              {}
+                              }
+        >?</AwesomeButton>
+        <button> <img src="./assets/settings-solid.png" alt="" onClick={this.myfunction} /></button>
       </div>
-
     );
   }
 }
