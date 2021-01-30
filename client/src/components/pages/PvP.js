@@ -12,6 +12,12 @@ class PvP extends Component {
         width: "100%",
         height: "100%",
         type: Phaser.AUTO,
+        physics: {
+          default: "arcade",
+          arcade: {
+            debug: true
+          }
+        },
         scene: {
 
           init:
@@ -22,30 +28,54 @@ class PvP extends Component {
           preload: function() {
             console.log("first")
             this.load.image('sky', "./background.png")
-            this.load.image('albert', "./Albert1.png")
+            this.load.image('albert', "./idle.png")
             this.load.image('ground', "./platform.png")
           },
           create:function() {
-            console.log("here")
-            let keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-            let keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-            let keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-            let keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+            this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+            this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+            this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+            this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
 
 
             this.sky = this.add.sprite(400,400, 'sky');
-            this.add.sprite(100,100, 'ground');
-            this.albert =this.add.sprite(300,100, 'albert')
+            this.platform = this.physics.add.sprite(100,100, 'ground').setImmovable();
+            this.platform.setPosition(this.cameras.main.centerX, this.cameras.main.centerY + (this.cameras.main.centerY)/2);
+            this.platform.enableBody = true;
+            this.albert =this.physics.add.sprite(this.cameras.main.centerX,100, 'albert')
             this.albert.setDisplaySize(200, 200)
+            this.physics.add.collider(this.albert, this.platform)
+            this.albert.enableBody = true;
+            this.albert.body.setGravity(0, 100);
             this.cursorKeys = this.input.keyboard.createCursorKeys()
-
+            this.hitWall = false;
 
           },
           update:
             function() {
-              if(this.cursorKeys.right.isDown){
+              this.physics.world.collide(this.albert, this.platform, function(){
+                  if(this.hitWall){
+                      return;
+                  }
+                  this.albert.y = this.albert.y;
+                  this.hitWall = true;
+              });
+
+              if(this.keyD.isDown){
                 this.albert.x += 4;
+                console.log("PRESSINg Right")
+              }
+              if(this.keyA.isDown){
+                this.albert.x -= 4;
+                console.log("PRESSINg Right")
+              }
+              if(this.keyS.isDown){
+                this.albert.y += 4;
+                console.log("PRESSINg Right")
+              }
+              if(this.keyW.isDown){
+                this.albert.y -= 4;
                 console.log("PRESSINg Right")
               }
             }
