@@ -1,5 +1,9 @@
 git .homepage-base{
     height: 100vh;
+    margin: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 .title{
     color: chartreuse;
