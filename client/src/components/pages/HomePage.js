@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import background from './assets/background image.jpg'
+import "./HomePage.css"
+
 
 class HomePage extends Component {
   constructor(props) {
@@ -18,11 +21,13 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div className="homepage-base">
+      <div className="homepage-base" style={{ backgroundImage: `url(${background})` }}>
         <div className = "title">
           Rumble in the Swamp!
         </div>
+        <div >
 
+        </div>
 
 
 
