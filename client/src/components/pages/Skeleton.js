@@ -6,7 +6,6 @@ class Skeleton extends Component {
     // Initialize Default State
     this.state = {};
   }
-
   componentDidMount() {
     // remember -- api calls go here!
   }
