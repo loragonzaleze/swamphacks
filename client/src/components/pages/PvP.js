@@ -17,6 +17,7 @@ class PvP extends Component {
           arcade: {
             debug: true
           }
+
         },
         scene: {
 
@@ -40,9 +41,7 @@ class PvP extends Component {
 
 
             this.sky = this.add.sprite(400,400, 'sky');
-            this.platform = this.physics.add.sprite(100,100, 'ground').setImmovable();
-            this.platform.setPosition(this.cameras.main.centerX, this.cameras.main.centerY + (this.cameras.main.centerY)/2);
-            this.platform.enableBody = true;
+
             this.albert =this.physics.add.sprite(this.cameras.main.centerX,100, 'albert')
             this.albert.setDisplaySize(200, 200)
             this.physics.add.collider(this.albert, this.platform)
@@ -50,6 +49,10 @@ class PvP extends Component {
             this.albert.body.setGravity(0, 100);
             this.cursorKeys = this.input.keyboard.createCursorKeys()
             this.hitWall = false;
+
+            this.platform = this.physics.add.sprite(100,100, 'ground').setImmovable();
+            this.platform.setPosition(this.cameras.main.centerX, this.cameras.main.centerY + (this.cameras.main.centerY)/2);
+            this.platform.enableBody = true;
 
           },
           update:
