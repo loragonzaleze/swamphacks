@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Router } from "@reach/router";
 
 class PvP extends Component {
   constructor(props) {
@@ -12,8 +13,21 @@ class PvP extends Component {
 
   render() {
     return (
-      <>
-      </>
+      <Provider store={store}>
+      <div
+        style={{
+          display: 'flex',
+          alignContent: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+          height: '100vh'
+        }}
+      >
+        <UI />
+        <Game />
+      </div>
+      </Provider>
+
     );
   }
 }

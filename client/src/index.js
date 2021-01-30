@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App.js";
 import Phaser from"phaser";
-import logoImg from "./components/pages/assets/logo.png"
+//import logoImg from "./components/pages/assets/logo.png"
 
 /*const config = {
   type: Phaser.AUTO,
