@@ -30,7 +30,7 @@ class PvE extends Component {
             let windowHeight = window.innerHeight;
             this.bg = this.add.image(windowWidth / 2, windowHeight / 2, 'sky');
             this.bg.setDisplaySize(windowWidth, windowHeight);
-            this.add.sprite(64, windowHeight-64, "ground");
+            this.add.sprite(64, windowHeight-25, "ground");
           },
           update:
             function() {
