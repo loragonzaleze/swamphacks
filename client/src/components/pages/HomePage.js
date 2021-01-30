@@ -18,9 +18,14 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
-        This is a number
-        {this.state.user}
+      <div className="homepage-base">
+        <div className = "title">
+          Rumble in the Swamp!
+        </div>
+
+
+
+
 
       </div>
 
