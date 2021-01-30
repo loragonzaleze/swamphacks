@@ -57,13 +57,13 @@ class PvP extends Component {
           },
           update:
             function() {
-              this.physics.world.collide(this.albert, this.platform, function(){
+             /* this.physics.world.collide(this.albert, this.platform, function(){
                   if(this.hitWall){
                       return;
                   }
                   this.albert.y = this.albert.y;
                   this.hitWall = true;
-              });
+              });*/
 
               if(this.keyD.isDown){
                 this.albert.x += 4;
