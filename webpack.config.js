@@ -56,6 +56,11 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
+      },
     ],
   },
   resolve: {
@@ -75,3 +80,17 @@ module.exports = {
     },
   },
 };
+/*new webpack.HotModuleReplacementPlugin()*/
+/*
+* new CleanWebpackPlugin(["dist"], {
+    root: path.resolve(__dirname, "../")
+  }),
+    new webpack.DefinePlugin({
+      CANVAS_RENDERER: JSON.stringify(true),
+      WEBGL_RENDERER: JSON.stringify(true)
+    }),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      filename: "index.html",
+      inject: "body"
+    })*/

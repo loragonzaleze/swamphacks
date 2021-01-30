@@ -29,6 +29,7 @@ class HomePage extends Component {
         <div className = "title">
           Rumble in the Swamp!
         </div>
+
         <AwesomeButton  type="primary"
                         style = {{position:this.fixed, left: 680, top: 300}}
                        onPress={() =>
@@ -48,7 +49,6 @@ class HomePage extends Component {
                               {}
                               }
         >?</AwesomeButton>
-        <button> <img src="./assets/settings-solid.png" alt="" onClick={this.myfunction} /></button>
       </div>
     );
   }
