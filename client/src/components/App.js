@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
-import PvP from "./pages/PvP";
+import PvP from "./pages/PvP.js";
+import HomePage from "./pages/HomePage.js";
 
 import "../utilities.css";
-import HomePage from "./pages/HomePage";
 
 /**
  * Define the "App" component as a class.
@@ -35,8 +34,6 @@ class App extends Component {
             path="/game"
             userId={this.state.userId}
           />
-
-
           <NotFound default />
         </Router>
       </>

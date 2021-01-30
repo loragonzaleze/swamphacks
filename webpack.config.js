@@ -66,18 +66,7 @@ module.exports = {
   resolve: {
     extensions: ["*", ".js", ".jsx"],
   },
-  plugins: [new CleanWebpackPlugin(["dist"], {
-    root: path.resolve(__dirname, "../")
-  }),
-    new webpack.DefinePlugin({
-      CANVAS_RENDERER: JSON.stringify(true),
-      WEBGL_RENDERER: JSON.stringify(true)
-    }),
-    new HtmlWebpackPlugin({
-      template: "./index.html",
-      filename: "index.html",
-      inject: "body"
-    })],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     historyApiFallback: true,
     contentBase: "./client/dist",
@@ -92,3 +81,16 @@ module.exports = {
   },
 };
 /*new webpack.HotModuleReplacementPlugin()*/
+/*
+* new CleanWebpackPlugin(["dist"], {
+    root: path.resolve(__dirname, "../")
+  }),
+    new webpack.DefinePlugin({
+      CANVAS_RENDERER: JSON.stringify(true),
+      WEBGL_RENDERER: JSON.stringify(true)
+    }),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+      filename: "index.html",
+      inject: "body"
+    })*/
