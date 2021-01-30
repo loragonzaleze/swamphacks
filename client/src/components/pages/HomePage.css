@@ -8,3 +8,7 @@ git .homepage-base{
 .title{
     color: chartreuse;
 }
+
+#root {
+    overflow: hidden;
+}

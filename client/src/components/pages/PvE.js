@@ -26,10 +26,11 @@ class PvE extends Component {
           },
           create:function() {
             console.log("here")
-            //this.game.physics.();
-            this.add.sprite(400,400, 'sky');
-            this.add.sprite(300,100, 'ground');
-            this.add.sprite(100,100, 'ground');
+            let windowWidth = window.innerWidth;
+            let windowHeight = window.innerHeight;
+            this.bg = this.add.image(windowWidth / 2, windowHeight / 2, 'sky');
+            this.bg.setDisplaySize(windowWidth, windowHeight);
+            this.add.sprite(64, windowHeight-64, "ground");
           },
           update:
             function() {
@@ -52,7 +53,7 @@ class PvE extends Component {
     console.log("here")
     //this.game.physics.();
     this.add.sprite(0,0, 'sky')
-    let platforms = this.game.add.group()
+    let platforms = this.game.adxd.group()
     platforms.enableBody = true
 
     let ground = platforms.create(0, this.game.world.height - 64, 'ground')
@@ -95,7 +96,8 @@ class PvE extends Component {
     const { initialize, game } = this.state
     console.log('Last')
     return (
-      <IonPhaser game={game} initialize={initialize} />
+      <IonPhaser game={game} initialize={initialize} style={{    marginBottom: "-4px",
+        overflow: "hidden"}} />
     )
   }
 
