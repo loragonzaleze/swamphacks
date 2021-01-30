@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Router } from "@reach/router";
 import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
+import PvP from "./pages/PvP";
 
 import "../utilities.css";
 import HomePage from "./pages/HomePage";
@@ -28,6 +29,10 @@ class App extends Component {
         <Router>
           <HomePage
             path="/"
+            userId={this.state.userId}
+          />
+          <PvP
+            path="/game"
             userId={this.state.userId}
           />
 
