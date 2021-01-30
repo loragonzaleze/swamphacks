@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import Phaser from "phaser";
+import background from "./gameImages/background.png"
+import gator from "./gameImages/Albert1.png"
+import platform from "./gameImages/platform.png"
 
 class Skeleton extends Component {
-  constructor(props) {
+  /*constructor(props) {
     super(props);
     // Initialize Default State
     this.state = {};
-  }
+  }*/
   componentDidMount() {
-    this.game = new Phaser.game({
+    this.gamePvE = new Phaser.Game({
       type: Phaser.AUTO,
       width: 800,
       height: 600,
@@ -29,12 +32,26 @@ class Skeleton extends Component {
   }
   _preload()
   {
-    this.load.image('gameImages/background.png')
+    this.gamePvE.load.image('sky', background)
+    this.gamePvE.load.image('gator', gator)
+    this.game.PvE.load.image('ground', platform)
   }
   _create()
   {
-    this.game.physics.start(Phaser.Physics.Arcade)
-    this.game.add.sprite(0,0, 'gameImages/Albert1.png')
+    console.log("here")
+    //this.game.physics.();
+    this.gamePvE.add.sprite(0,0, 'sky')
+    let platforms = this.game.add.group()
+    platforms.enableBody = true
+
+    let ground = platforms.create(0, this.game.world.height - 64, 'ground')
+    ground.scale.setTo(2,2)
+    ground.body.immovable = true
+
+  }
+  _update()
+  {
+
   }
 
 }
