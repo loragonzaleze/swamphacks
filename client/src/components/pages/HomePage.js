@@ -7,6 +7,7 @@ import Popup from './PopUp';
 import "./HomePage.css"
 import styled from 'styled-components';
 import { navigate } from "@reach/router";
+import CreatorPop from "./CreatorPop";
 //import HomeMusic from './assets/HomeMusic.mp3';
 
 
@@ -36,11 +37,17 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     // Initialize Default State
-    this.state = { showPopup: false };
+    this.state = { showPopup: false, showPopup2: false };
   }
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
+    });
+  }
+  togglePopup2()
+  {
+    this.setState({
+      showPopup2: !this.state.showPopup2
     });
   }
 
@@ -61,7 +68,7 @@ class HomePage extends Component {
         <img className = "title-base" src ={title} alt = "title"/>
         <img className = "AlbertChomp" src ={AlbertChomp} alt = "AlbertChomp"/>
         <img className = "BertoChomp" src ={BertoChomp} alt = "BertoChomp"/>
-        <Button  onClick={() => {navigate("/PvE")}} className = "PButton">
+        <Button  onClick={() => {navigate("/PvPBruce")}} className = "PButton">
             Play
           </Button>
           <Button onClick={this.togglePopup.bind(this)} className = "HButton">
@@ -73,12 +80,12 @@ class HomePage extends Component {
           />
           : ""
         }
-        <Button onClick={this.togglePopup.bind(this)} className = "Creators">
+        <Button onClick={this.togglePopup2.bind(this)} className = "Creators">
           Creators
         </Button>
-        {this.state.showPopup ?
-          <Popup
-            closePopup={this.togglePopup.bind(this)}
+        {this.state.showPopup2 ?
+          <CreatorPop
+            closePopup={this.togglePopup2.bind(this)}
           />
           : ""
         }
