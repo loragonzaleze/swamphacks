@@ -1,4 +1,4 @@
-.popup {
+.popupOG {
     position: fixed;
     width: 1100px;
     height: 90%;
@@ -7,16 +7,19 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0,0,0, 0);
 }
-.popup_inner {
+.popup_innerOG {
     color: white;
     position: fixed;
     width: 40%;
-    height: 80%;
+    height: 90% !important;
     top: 10%;
     left: 33%;
     border: 6px solid orange;
     background: blue;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .PopB
