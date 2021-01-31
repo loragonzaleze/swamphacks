@@ -16,7 +16,7 @@
     left: 33%;
     border: 6px solid orange;
     background: blue;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .PopB

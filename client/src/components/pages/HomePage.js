@@ -38,6 +38,7 @@ class HomePage extends Component {
     // Initialize Default State
     this.state = { showPopup: false };
   }
+
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
@@ -47,6 +48,7 @@ class HomePage extends Component {
   componentDidMount() {
 
   }
+
   playAudio() {
     const audioEl = document.getElementsByClassName("audio-element")[0];
     audioEl.play();
