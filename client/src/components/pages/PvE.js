@@ -3,16 +3,12 @@ import Phaser from "phaser";
 import {IonPhaser} from "@ion-phaser/react";
 
 import "./PvE.css";
-<<<<<<< HEAD
-=======
-
 
 let player1Health = 100;
 let player2Health = 100;
 
 let winner = null;
 
->>>>>>> 55c10dd41826e34634e4c5e05de1c2d166aae95a
 class PvE extends Component {
   player;
   isTurned = false;

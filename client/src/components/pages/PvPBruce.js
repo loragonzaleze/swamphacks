@@ -109,7 +109,7 @@ class PvE extends Component {
             this.add.sprite(windowWidth / 2, windowHeight - 250, "ground");
 
             this.player = this.physics.add.sprite(160,windowHeight - 250, 'albert');
-            this.player2 = this.physics.add.sprite(160,windowHeight - 250, 'invertedAlbert');
+            this.player2 = this.physics.add.sprite(windowWidth - 160,windowHeight - 250, 'invertedAlbert');
 
 
             this.player.setBounce(0.2);
