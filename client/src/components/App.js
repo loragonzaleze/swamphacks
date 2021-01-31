@@ -7,6 +7,7 @@ import PvE from "./pages/PvE.js";
 
 import "../utilities.css";
 import SignIn from "./pages/SignIn";
+import PvPBruce from "./pages/PvPBruce";
 
 let firebase = require('firebase');
 let firebaseui = require('firebaseui')
@@ -70,6 +71,10 @@ class App extends Component {
             />
             <PvE
               path="/PvE"
+              user={this.state.user}
+            />
+            <PvPBruce
+              path="/PvPBruce"
               user={this.state.user}
             />
 

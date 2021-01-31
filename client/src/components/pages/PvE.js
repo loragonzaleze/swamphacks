@@ -3,11 +3,11 @@ import Phaser from "phaser";
 import {IonPhaser} from "@ion-phaser/react";
 
 import "./PvE.css";
-
 class PvE extends Component {
   player;
   isTurned = false;
   platform;
+  enemies;
   constructor(props) {
     super(props);
 
@@ -20,7 +20,6 @@ class PvE extends Component {
         physics: {
           default: "arcade",
           arcade: {
-            debug: true
           }
 
         },
@@ -35,6 +34,7 @@ class PvE extends Component {
             this.load.image('albert', "./walk1.png")
             this.load.image('ground', "./ground.png")
             this.load.image('platform', "./ground2.png")
+            this.load.image('covid', "./corona.png")
 
             this.load.spritesheet('gatorWalkRight',"./walkv4.png", {frameWidth: 400, frameHeight: 400} )
             this.load.spritesheet('gatorWalkLeft',"./walkmirrorr.png", {frameWidth: 400, frameHeight: 400} )
@@ -80,7 +80,18 @@ class PvE extends Component {
             this.player.body.setGravity(0, 400);
             this.platform.create(windowWidth/2, windowHeight - 50, 'platform');
 
+
+            this.enemies = this.physics.add.group({
+              key: 'covid',
+              repeat: 1,
+              setXY:{x : 12, y : 0, stepX: 70}
+            });
+
+
             this.physics.add.collider(this.player,this.platform);
+            this.physics.add.collider(this.enemies,this.platform);
+            this.physics.add.collider(this.player,this.enemies);
+
 
             this.anims.create({
               key: 'right',
@@ -225,8 +236,7 @@ class PvE extends Component {
               }
 
             }
-        }
-
+        },
       }
     }
 
