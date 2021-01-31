@@ -43,7 +43,6 @@ class PvE extends Component {
     this.bait= {
       initialize: true,
       game: {
-
       }
     }
 
@@ -194,13 +193,13 @@ class PvE extends Component {
             this.anims.create({
               key: 'cronch',
               frames: this.anims.generateFrameNumbers('gatorCronch', {start:0, end: 8}),
-              frameRate: 10,
+              frameRate: 20,
               repeat: 0
             })
             this.anims.create({
               key: 'cronchMirror',
               frames: this.anims.generateFrameNumbers('gatorCronchMirror', {start:0, end: 8}),
-              frameRate: 10,
+              frameRate: 20,
               repeat: 0
             })
             this.anims.create({
@@ -281,13 +280,13 @@ class PvE extends Component {
             this.anims.create({
               key: 'cronchInverted',
               frames: this.anims.generateFrameNumbers('invertedGatorCronch', {start:0, end: 8}),
-              frameRate: 10,
+              frameRate: 20,
               repeat: 0
             })
             this.anims.create({
               key: 'cronchMirrorInverted',
               frames: this.anims.generateFrameNumbers('invertedGatorCronchMirror', {start:0, end: 8}),
-              frameRate: 10,
+              frameRate: 20,
               repeat: 0
             })
             this.anims.create({
