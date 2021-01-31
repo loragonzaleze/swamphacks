@@ -23,7 +23,7 @@ const Button = styled.button `
 class Popup extends React.Component {
   render() {
     return (
-      <div className='popup'>
+      <div className='popupOG'>
         <div className='popup_innerOG'>
           <div className="popup-content">
             <h1>How to Play</h1>

@@ -1,17 +1,18 @@
 .popup {
     position: fixed;
-    width: 1100px;
-    height: 90%;
+    width: 1400px;
+    height: 80%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0,0,0, 0);
 }
-.popup_innerOG {
+.popup_inner {
     color: white;
+    font-size: 12px;
     position: fixed;
     width: 40%;
-    height: 90% !important;
+    height: 80% !important;
     top: 10%;
     left: 33%;
     border: 6px solid orange;
@@ -22,48 +23,40 @@
     flex-direction: column;
 }
 
-.PopB
+.PopB2
 {
     position:absolute;
     top: 95%;
-    left: 33%;
+    left: 37%;
 }
 
-.popup-content {
+.popup-content2 {
+    font-size: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.ArrowKeys
+.Bruce
 {
-    width: 70%;
+    width: 90%;
 }
-.WASD
+.Edwin
 {
-    width: 70%;
+    width: 90%;
 
 }
-.Q
+.Connor
 {
-    width: 25%;
+    width: 90%;
 }
-.E
+.Samir
 {
-    width: 25%;
+    width: 90%;
 }
-.Spacebar
-{
-    position: relative;
-    left: 5%;
-    width: 100%;
-}
-.Enter
-{
-    width: 40%;
-}
-.BigWrapper
+
+.BigWrapper2
 {
     width: 100%;
     height: 100%;
@@ -72,7 +65,7 @@
     justify-content: space-between;
 }
 
-.P1
+.P12
 {
     display: flex;
     flex-direction: column;
@@ -82,7 +75,25 @@
     height: 80%;
 }
 
-.P2
+.P22
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 45%;
+    height: 80%;
+}
+.P3
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 45%;
+    height: 80%;
+}
+.P4
 {
     display: flex;
     flex-direction: column;
