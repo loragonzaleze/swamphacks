@@ -60,7 +60,6 @@ class PvE extends Component {
         physics: {
           default: "arcade",
           arcade: {
-            debug:true
           }
 
         },
@@ -426,7 +425,7 @@ class PvE extends Component {
                 else {
                   this.player.anims.play('jump', true);
                 }
-                this.player.setVelocityY(-300);
+                this.player.setVelocityY(-500);
 
               }
               else if(this.keyQ.isDown)
@@ -462,7 +461,7 @@ class PvE extends Component {
                     console.log(b)
                     if(4* b - 20 <= 0) {
                       winner = "player2"
-                      alert("Player 2 wins!")
+                      alert("Player 1 wins!")
                       navigate("/")
                     }
                     document.getElementById("health2").style.width = "" + 4*b - 20 + "px"
@@ -529,8 +528,8 @@ class PvE extends Component {
                     let b = Math.floor(document.getElementById("health2").offsetWidth / 4)
                     console.log(b)
                     if(4*b - 10 <= 0) {
-                      winner = "player2"
-                      alert("Player 2 wins!")
+                      winner = "player1"
+                      alert("Player 1 wins!")
                       navigate("/")
                     }
                     document.getElementById("health2").style.width = "" + 4*b - 10 + "px"
@@ -604,7 +603,7 @@ class PvE extends Component {
                 else {
                   this.player2.anims.play('jumpInverted', true);
                 }
-                this.player2.setVelocityY(-300);
+                this.player2.setVelocityY(-500);
               }
               else if(this.keySPACE.isDown)
               {
@@ -638,7 +637,7 @@ class PvE extends Component {
                   console.log(b)
                   if(4* b - 20 <= 0) {
                     winner = "player1"
-                    alert("Player 1 wins!")
+                    alert("Player 2 wins!")
                     navigate("/")
                   }
                   document.getElementById("health1").style.width = "" + 4*b - 20 + "px"
@@ -697,7 +696,7 @@ class PvE extends Component {
                     console.log(b)
                     if(4*b - 10 <= 0) {
                       winner = "player1"
-                      alert("Player 1 wins!")
+                      alert("Player 2 wins!")
                       navigate("/")
                     }
                     document.getElementById("health1").style.width = "" + 4*b - 10 + "px"
