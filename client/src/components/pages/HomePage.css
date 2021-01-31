@@ -5,12 +5,31 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
-.title{
-    color: darkgreen;
-    font-size: 80px;
-    text-align: center;
-    word-wrap: anywhere;
-    font-family: "Fantasy", Jazz LET, fantasy;
+.title-base{
+    background: black;
+    padding: 20px;
+    border: 6px solid orange;
+    width: 45%;
+    height: auto;
+    position: absolute;
+    top: 14%;
+    left: 28%;
 }
+.HButton
+{
+    height: auto;
+    position: absolute;
+    top: 85%;
+    left: 85%;
+}
+.PButton
+{
+    position: absolute;
+    top: 50%;
+    left: 47.5%;
+}
+
+
+
 
 
