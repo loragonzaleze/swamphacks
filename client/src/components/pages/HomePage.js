@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import background from './assets/benhill.png'
 import title from './assets/rits.png'
+import AlbertChomp from './assets/bite2.gif'
+import BertoChomp from './assets/bite2inverted.gif'
 import Popup from './PopUp';
 import "./HomePage.css"
 import styled from 'styled-components';
+import { navigate } from "@reach/router";
 //import HomeMusic from './assets/HomeMusic.mp3';
 
 
@@ -56,12 +59,23 @@ class HomePage extends Component {
     return (
       <div className="homepage-base" style={{ backgroundImage: `url(${background})` }}>
         <img className = "title-base" src ={title} alt = "title"/>
-          <Button  onClick={this.playAudio} className = "PButton">
+        <img className = "AlbertChomp" src ={AlbertChomp} alt = "AlbertChomp"/>
+        <img className = "BertoChomp" src ={BertoChomp} alt = "BertoChomp"/>
+        <Button  onClick={() => {navigate("/PvE")}} className = "PButton">
             Play
           </Button>
           <Button onClick={this.togglePopup.bind(this)} className = "HButton">
             How To
           </Button>
+        {this.state.showPopup ?
+          <Popup
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : ""
+        }
+        <Button onClick={this.togglePopup.bind(this)} className = "Creators">
+          Creators
+        </Button>
         {this.state.showPopup ?
           <Popup
             closePopup={this.togglePopup.bind(this)}

@@ -15,13 +15,34 @@
     top: 14%;
     left: 28%;
 }
+ .AlbertChomp{
+     width: 20%;
+     height:auto;
+     position: absolute;
+     bottom: 75px;
+     left: 20px;
+ }
+ .BertoChomp{
+     width: 20%;
+     height:auto;
+     position: absolute;
+     bottom: 75px;
+     right: 20px;
+ }
 .HButton
 {
     height: auto;
     position: absolute;
-    top: 85%;
-    left: 85%;
+    bottom: 60px;
+    right: 48px;
 }
+ .Creators
+ {
+     height: auto;
+     position: absolute;
+     bottom: 60px;
+     left: 48px;
+ }
 .PButton
 {
     position: absolute;
