@@ -1,0 +1,17 @@
+
+
+.healthbar {
+    left: 25px;
+    top: 50px;
+    position: absolute;
+    background: gray;
+    z-index: 30;
+}
+
+.health {
+    left: 25px;
+    top: 50px;
+    position: absolute;
+    background: green;
+    z-index: 40;
+}

@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import Phaser from "phaser";
 import {IonPhaser} from "@ion-phaser/react";
 
+import "./PvE.css";
+
 class PvE extends Component {
   player;
+  isTurned = false;
   constructor(props) {
     super(props);
 
@@ -31,9 +34,12 @@ class PvE extends Component {
             this.load.image('marston', "./background2saturation.png")
             this.load.image('albert', "./walk1.png")
             this.load.image('ground', "./ground.png")
-            this.load.spritesheet('gatorWalkRight',"./walkyslush.png", {frameWidth: 395, frameHeight: 330} )
+            this.load.spritesheet('gatorWalkRight',"./walkv4.png", {frameWidth: 400, frameHeight: 400} )
+            this.load.spritesheet('gatorWalkLeft',"./walk mirrorFinal.png", {frameWidth: 400, frameHeight: 330} )
             this.load.spritesheet('gatorWalkIdle',"./idle.png", {frameWidth: 400, frameHeight: 350})
-            this.load.spritesheet('gatorCronch', "./cronch.png", {frameWidth: 395, frameHeight:330})
+            this.load.spritesheet('gatorWalkIdleMirror',"./idle mirror.png", {frameWidth: 400, frameHeight: 370})
+            this.load.spritesheet('gatorCronch', "./cronch.png", {frameWidth: 395, frameHeight:350})
+            this.load.spritesheet('gatorSwipe', "./swipper.png", {frameWidth: 386, frameHeight:350})
           },
           create:function() {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -41,6 +47,8 @@ class PvE extends Component {
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
             this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
             this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+            this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+
 
             let windowWidth = window.innerWidth;
             let windowHeight = window.innerHeight;
@@ -56,8 +64,14 @@ class PvE extends Component {
 
 
             this.anims.create({
-              key: 'left',
+              key: 'right',
               frames: this.anims.generateFrameNumbers('gatorWalkRight', { start: 0, end: 8 }),
+              frameRate: 10,
+              repeat: -1
+            });
+            this.anims.create({
+              key: 'left',
+              frames: this.anims.generateFrameNumbers('gatorWalkLeft', { start: 0, end: 8 }),
               frameRate: 10,
               repeat: -1
             });
@@ -68,24 +82,44 @@ class PvE extends Component {
               repeat: -1
             })
             this.anims.create({
+              key: 'idleMirror',
+              frames: this.anims.generateFrameNumbers('gatorWalkIdleMirror', {start:0, end: 3}),
+              frameRate: 3,
+              repeat: -1
+            })
+            this.anims.create({
               key: 'cronch',
               frames: this.anims.generateFrameNumbers('gatorCronch', {start:0, end: 8}),
               frameRate: 10,
-              repeat: 1
+              repeat: 0
             })
+            this.anims.create({
+              key: 'swipe',
+              frames: this.anims.generateFrameNumbers('gatorSwipe', {start:0, end: 3}),
+              frameRate: 10,
+              repeat: 0
+            })
+
+
 
 
           },
           update:
             function() {
               if(this.keyD.isDown){
+                this.player.body.setSize(180,350,false);
                 this.player.x += 4;
                 console.log("PRESSINg Right")
-                this.player.anims.play('left', true);
+                this.player.anims.play('right', true);
+                this.isTurned = false;
+
               }
               else if(this.keyA.isDown){
                 this.player.x -= 4;
                 console.log("PRESSINg Right")
+                this.player.anims.play('left', true);
+                this.isTurned = true;
+                this.player.body.setSize(180,350,true);
 
               }
               else if(this.keyS.isDown){
@@ -96,16 +130,31 @@ class PvE extends Component {
                 this.player.y -= 4;
                 console.log("PRESSINg Right")
               }
-              else if(this.keyQ.isDown){
-                this.player.anims.play('cronch',true);
+              else if(this.keyQ.isDown)
+              {
+                this.player.anims.play('cronch', true);
+              }
+              else if(this.keyE.isDown)
+              {
+                this.player.anims.play('swipe', true);
               }
               else
               {
-                this.player.anims.play('idle',true);
+                if(this.isTurned)
+                {
+                  this.player.anims.play('idleMirror',true);
+                  this.player.body.setSize(180,350,true);
+                }
+                else
+                {
+                  this.player.body.setSize(180,350,false);
+                  this.player.anims.play('idle',true);
+                }
               }
 
             }
         }
+
       }
     }
 
@@ -116,8 +165,16 @@ class PvE extends Component {
     const { initialize, game } = this.state
     console.log('Last')
     return (
-      <IonPhaser game={game} initialize={initialize} style={{    marginBottom: "-4px",
-        overflow: "hidden"}} />
+      <>
+        <div className="healthbar" style={{ position: "absolute", width: "400px", height: "50px"
+        }}>
+        </div>
+        <div className="health" style={{ position: "absolute", width: "300px", height: "50px"}}>
+        </div>
+        <IonPhaser game={game} initialize={initialize} style={{    marginBottom: "-4px",
+          overflow: "hidden"}} />
+          </>
+
     )
   }
 
