@@ -35,12 +35,21 @@ class PvE extends Component {
             this.load.image('albert', "./walk1.png")
             this.load.image('ground', "./ground.png")
             this.load.spritesheet('gatorWalkRight',"./walkv4.png", {frameWidth: 400, frameHeight: 400} )
-            this.load.spritesheet('gatorWalkLeft',"./walk mirrorFinal.png", {frameWidth: 400, frameHeight: 330} )
+            this.load.spritesheet('gatorWalkLeft',"./walkmirrorr.png", {frameWidth: 400, frameHeight: 400} )
+
             this.load.spritesheet('gatorWalkIdle',"./idlv4.png", {frameWidth: 400, frameHeight: 400})
-            this.load.spritesheet('gatorWalkIdleMirror',"./idle mirror.png", {frameWidth: 400, frameHeight: 370})
+            this.load.spritesheet('gatorWalkIdleMirror',"./idlemirror.png", {frameWidth: 400, frameHeight: 400})
+
             this.load.spritesheet('gatorCronch', "./bnitev4.png", {frameWidth: 400, frameHeight:400})
+            this.load.spritesheet('gatorCronchMirror', "./chompmirror.png",{frameWidth: 400, frameHeight: 400})
+
             this.load.spritesheet('gatorSwipe', "./swipev4.png", {frameWidth: 400, frameHeight:400})
-            this.load.spritesheet('gatorBlock', "./blockv4.png",{frameWidth: 400, frameHeight: 400});
+            this.load.spritesheet('gatorSwipeMirror', "./swipeMirror.png",{frameWidth: 400, frameHeight: 400});
+
+            this.load.spritesheet('gatorBlock', "./blockv4.png",{frameWidth: 400, frameHeight: 400})
+            this.load.spritesheet('gatorBlockMirror', "./blocokedlong mirror.png",{frameWidth: 400, frameHeight: 400})
+
+
           },
           create:function() {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -95,8 +104,20 @@ class PvE extends Component {
               repeat: 0
             })
             this.anims.create({
+              key: 'cronchMirror',
+              frames: this.anims.generateFrameNumbers('gatorCronchMirror', {start:0, end: 8}),
+              frameRate: 10,
+              repeat: 0
+            })
+            this.anims.create({
               key: 'swipe',
               frames: this.anims.generateFrameNumbers('gatorSwipe', {start:0, end: 3}),
+              frameRate: 10,
+              repeat: 0
+            })
+            this.anims.create({
+              key: 'swipeMirror',
+              frames: this.anims.generateFrameNumbers('gatorSwipeMirror', {start:0, end: 3}),
               frameRate: 10,
               repeat: 0
             })
@@ -106,10 +127,12 @@ class PvE extends Component {
               frameRate: 10,
               repeat: 0
             })
-
-
-
-
+            this.anims.create({
+              key: 'blockMirror',
+              frames: this.anims.generateFrameNumbers('gatorBlockMirror', {start:0, end: 7}),
+              frameRate: 10,
+              repeat: 0
+            })
           },
           update:
             function() {
@@ -129,8 +152,13 @@ class PvE extends Component {
                 this.player.body.setSize(180,350,true);
 
               }
-              else if(this.keyS.isDown){
-                this.player.anims.play('block', true);
+              else if(this.keyS.isDown) {
+                if (this.isTurned)
+                {
+                  this.player.anims.play('blockMirror', true);
+                } else {
+                  this.player.anims.play('block', true);
+                }
               }
               else if(this.keyW.isDown){
                 this.player.y -= 4;
@@ -138,11 +166,23 @@ class PvE extends Component {
               }
               else if(this.keyQ.isDown)
               {
-                this.player.anims.play('cronch', true);
+                if (this.isTurned)
+                {
+                  this.player.anims.play('cronchMirror', true);
+                } else {
+                  this.player.anims.play('cronch', true);
+                }
               }
               else if(this.keyE.isDown)
               {
-                this.player.anims.play('swipe', true);
+                if(this.isTurned)
+                {
+                  this.player.anims.play('swipeMirror',true);
+                }
+                else
+                {
+                  this.player.anims.play('swipe', true);
+                }
               }
               else
               {
