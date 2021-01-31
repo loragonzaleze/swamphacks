@@ -31,20 +31,10 @@ class Popup extends React.Component {
           <div className="popup-content">
             <h1>How to Play</h1>
           </div>
-          <img className = "AlbertTitle2" src ={AlbertTitle} alt = "AlbertTitle"/>
-          <img className = "BertoTitle2" src ={BertoTitle} alt = "BertoTitle"/>
           <div className = "BigWrapper">
-          <div className = "P1">
-            <h2>Player 1</h2>
-            <img className = "ArrowKeys" src ={Arrow} alt = "ArrowKeys"/>
-            <div>🠗 = Shield</div>
-            <p>Claw Attack</p>
-            <img className = "Spacebar" src ={Spacebar} alt = "Spacebar"/>
-            <p>Chomp</p>
-            <img className = "Enter" src ={Enter} alt = "Enter"/>
-          </div>
           <div className= "P2">
-            <h2>Player 2</h2>
+            <img className = "AlbertTitle2" src ={AlbertTitle} alt = "AlbertTitle"/>
+            <h2>Player 1</h2>
             <img className = "WASD" src ={WASD} alt = "WASD"/>
             <div>S = Shield</div>
             <p>Claw Attack</p>
@@ -52,6 +42,16 @@ class Popup extends React.Component {
             <p>Chomp</p>
             <img className = "E" src ={E} alt = "E"/>
           </div>
+            <div className = "P1">
+              <img className = "BertoTitle2" src ={BertoTitle} alt = "BertoTitle"/>
+              <h2>Player 2</h2>
+              <img className = "ArrowKeys" src ={Arrow} alt = "ArrowKeys"/>
+              <div>🠗 = Shield</div>
+              <p>Claw Attack</p>
+              <img className = "Spacebar" src ={Spacebar} alt = "Spacebar"/>
+              <p>Chomp</p>
+              <img className = "Enter" src ={Enter} alt = "Enter"/>
+            </div>
             </div>
           <Button className = "PopB" onClick={this.props.closePopup}>close</Button>
 

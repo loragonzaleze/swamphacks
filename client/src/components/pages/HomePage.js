@@ -19,9 +19,9 @@ const theme = {
   }
 
 }
-const Button = styled.button `
+let Button = styled.button `
   background-color: ${props => theme[props.theme].default};
-  width: 150px;
+  width: 10%;
   height: 50px;
   color: white;
   padding: 10px 15px;
@@ -29,13 +29,13 @@ const Button = styled.button `
   outline-width: 0;
   text-transform: uppercase;
   cursor: pointer;
+  font-size: 1vw;
   `
 Button.defaultProps = {
   theme: 'blue'
 }
 
 class HomePage extends Component {
-  fixed;
   constructor(props) {
     super(props);
     // Initialize Default State
@@ -60,11 +60,15 @@ class HomePage extends Component {
 
 
 
-
   render() {
     return (
       <div className="homepage-base" style={{ backgroundImage: `url(${background})` }}>
+        <div className= "container3">
         <img className = "title-base" src ={title} alt = "title"/>
+        </div>
+        <Button  onClick={() => {navigate("/PvPBruce")}} className = "PButton">
+          Play
+        </Button>
         <div className = "container1">
         <img className = "AlbertChomp" src ={AlbertChomp} alt = "AlbertChomp"/>
         <img className = "AlbertTitle" src ={AlbertTitle} alt = "AlbertTitle"/>
@@ -73,18 +77,6 @@ class HomePage extends Component {
         <img className = "BertoChomp" src ={BertoChomp} alt = "BertoChomp"/>
         <img className = "BertoTitle" src ={BertoTitle} alt = "BertoTitle"/>
         </div>
-        <Button  onClick={() => {navigate("/PvPBruce")}} className = "PButton">
-            Play
-          </Button>
-          <Button onClick = {this.togglePopup.bind(this)} className = "HButton">
-            How To
-          </Button>
-        {this.state.showPopup ?
-          <Popup
-            closePopup={this.togglePopup.bind(this)}
-          />
-          : ""
-        }
         <Button onClick={this.togglePopup2.bind(this)} className = "Creators">
           Creators
         </Button>
@@ -94,7 +86,15 @@ class HomePage extends Component {
           />
           : ""
         }
-
+        <Button onClick = {this.togglePopup.bind(this)} className = "HButton">
+          How To
+        </Button>
+        {this.state.showPopup ?
+          <Popup
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : ""
+        }
       </div>
     );
   }
