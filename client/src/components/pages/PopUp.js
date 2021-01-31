@@ -32,7 +32,7 @@ class Popup extends React.Component {
           <div className = "P1">
             <h2>Player 1</h2>
             <img className = "ArrowKeys" src ={Arrow} alt = "ArrowKeys"/>
-            <div>↓ = Shield</div>
+            <div>🠗 = Shield</div>
             <p>Claw Attack</p>
             <img className = "Spacebar" src ={Spacebar} alt = "Spacebar"/>
             <p>Chomp</p>
