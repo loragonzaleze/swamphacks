@@ -24,7 +24,7 @@ class Popup extends React.Component {
   render() {
     return (
       <div className='popup'>
-        <div className='popup_inner'>
+        <div className='popup_innerOG'>
           <div className="popup-content">
             <h1>How to Play</h1>
           </div>
@@ -49,6 +49,7 @@ class Popup extends React.Component {
           </div>
             </div>
           <Button className = "PopB" onClick={this.props.closePopup}>close</Button>
+
         </div>
       </div>
     );
