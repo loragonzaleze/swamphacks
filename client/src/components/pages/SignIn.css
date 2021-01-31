@@ -1,0 +1,29 @@
+
+.signin-base {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #31402e;
+    color: white;
+    height: 100vh;
+    font-weight: normal;
+}
+
+.signin-container {
+    height: 40%;
+    width: 40%;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./assets/bite.gif");
+    background-size: cover;
+    background-color: white;
+    font-size: 25px;
+    font-weight: normal;
+    box-shadow: 0 0 8px 5px green;
+    border-radius: 40px;
+    overflow: hidden;
+}
