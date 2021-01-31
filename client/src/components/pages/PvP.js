@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import {IonPhaser} from "@ion-phaser/react";
 
 class PvP extends Component {
+  function
   constructor(props) {
     super(props);
 
@@ -46,13 +47,16 @@ class PvP extends Component {
             this.albert.setDisplaySize(200, 200)
             this.physics.add.collider(this.albert, this.platform)
             this.albert.enableBody = true;
-            this.albert.body.setGravity(0, 100);
+            this.albert.body.setGravity(0, 400);
             this.cursorKeys = this.input.keyboard.createCursorKeys()
             this.hitWall = false;
-
-            this.platform = this.physics.add.sprite(100,100, 'ground').setImmovable();
+            this.albert.body.setSize(180,280, 0, -20)
+            this.platform = this.physics.add.sprite(0,0, 'ground').setImmovable();
             this.platform.setPosition(this.cameras.main.centerX, this.cameras.main.centerY + (this.cameras.main.centerY)/2);
             this.platform.enableBody = true;
+            this.jump = false;
+            this.physics.add.collider(this.albert, this.platform);
+            this.platform.body.setSize((2 *this.cameras.main.centerX), 100, 200, 0)
 
           },
           update:
@@ -78,7 +82,13 @@ class PvP extends Component {
                 console.log("PRESSINg Right")
               }
               if(this.keyW.isDown){
-                this.albert.y -= 4;
+                if(this.jump){
+                  this.albert.y = this.albert.y;
+                }
+                else{
+                  this.albert.y -= 10;
+                }
+
                 console.log("PRESSINg Right")
               }
             }
