@@ -1,18 +1,57 @@
 import React, { Component } from "react";
 import Phaser from "phaser";
 import {IonPhaser} from "@ion-phaser/react";
+import NewHealthBar from "../modules/NewHealthBar"
 
 import "./PvE.css";
+import { navigate } from "@reach/router";
+let player1on2 = false
+let player2on1 = false
+
+let player1Health = 100;
+let player2Health = 100;
+
+let winner = null;
+
 class PvE extends Component {
   player;
   player2;
   isTurnedP1 = false;
   isTurnedP2 = false;
+  isPushedP1 = false;
+  isPushedP2 = false;
   platform;
+  // doDamage = (player, dmg) => {
+  //   if(player === "player1") {
+  //
+  //   } else {
+  //     this.state.player2Health -= dmg
+  //     if(this.state.player2Health <= 0) {
+  //       winner = "player2"
+  //     }
+  //   }
+  // }
+
   constructor(props) {
     super(props);
 
     this.state = {
+      player1Health: 100,
+      player2Health: 100
+    }
+
+    this.bait= {
+      initialize: true,
+      game: {
+
+      }
+    }
+
+  }
+
+  componentDidMount() {
+
+    this.bait = {
       initialize: true,
       game: {
         width: "100%",
@@ -21,6 +60,7 @@ class PvE extends Component {
         physics: {
           default: "arcade",
           arcade: {
+            debug:true
           }
 
         },
@@ -118,8 +158,8 @@ class PvE extends Component {
             this.player2.setBounce(0.2);
             this.player2.setCollideWorldBounds(true);
 
-            this.player.body.setGravity(0, 400);
-            this.player2.body.setGravity(0, 400);
+            this.player.body.setGravity(0, 600);
+            this.player2.body.setGravity(0, 600);
 
             this.platform.create(windowWidth/2, windowHeight - 50, 'platform');
 
@@ -213,14 +253,7 @@ class PvE extends Component {
               repeat: 0
             })
 
-
-
-
-
-
-
-
-            //INVERTED GATOR
+            //ATTACK NORMAL GATOR
 
             this.anims.create({
               key: 'rightInverted',
@@ -306,33 +339,83 @@ class PvE extends Component {
               frameRate: 10,
               repeat: 0
             })
+            /** STUFF FOR ATTACK**/
+
+
+            //SHIELD
+            this.shield1 = false;
+            this.freeze1 = false;
+
+            //SHIELD P2
+            this.shield2 = false
+
+
+            this.initTime = this.game.getTime();
+
+            //ATTACK P1
+            this.contact = false;
+            this.attack1 = false
+            this.attack2 = false
+
+            //ATTACK P2
+            this.contact2 = false
+            this.attack3 = false
+            this.attack4 = false
+
+
+            /**Creates an overlay**/
+            this.physics.add.overlap(this.player, this.player2, function(){
+              player1on2 = true
+              player2on1 = true
+            })
+
+            /**ENDING ATTACK**/
           },
 
 
 
           update:
             function() {
-              if(this.keyD.isDown){
-                this.player.x += 4;
-                console.log("PRESSINg Right")
+              if(this.isPushedP2 == true)
+              {
+                if(this.player2.body.touching.down)
+                {
+                  this.player2.setVelocityX(0);
+                  this.isPushedP2 = false;
+                }
+              }
+              if(this.isPushedP1 == true)
+              {
+                if(this.player.body.touching.down)
+                {
+                  this.player.setVelocityX(0);
+                  this.isPushedP1 = false;
+                }
+              }
+
+              if(this.keyD.isDown && !this.shield1){
+                this.player.x += 7;
                 this.player.anims.play('right', true);
                 this.isTurnedP1 = false;
 
               }
-              else if(this.keyA.isDown){
-                this.player.x -= 4;
-                console.log("PRESSINg Right")
+              else if(this.keyA.isDown && !this.shield1){
+                this.player.x -= 7;
                 this.player.anims.play('left', true);
                 this.isTurnedP1 = true;
 
               }
               else if(this.keyS.isDown) {
-                if (this.isTurnedP1)
+                if (this.isTurnedP1 && !this.shield1)
                 {
-                  this.player.anims.play('blockMirror', true);
-                } else {
-                  this.player.anims.play('block', true);
+                  this.player.anims.play('blockMirror', false);
+                } else if(!this.isTurnedP1 && !this.shield1){
+                  this.player.anims.play('block', false);
                 }
+                this.shield1 = true
+              }
+              else if(this.keyS.isUp && this.shield1){
+                this.shield1 = false
               }
               else if(this.keyW.isDown && this.player.body.touching.down){
                 if (this.isTurnedP1)
@@ -348,28 +431,135 @@ class PvE extends Component {
               }
               else if(this.keyQ.isDown)
               {
-                if (this.isTurnedP1)
+                this.player.body.setSize(300, 400)
+                if(this.isTurnedP1)
+                {//SWIPE STUFF
+                  if(player2on1){
+                    this.initTime = this.game.getTime();
+                    this.attack1 = true;
+                    this.contact = true;
+                    //this.player.body.setSize(300, 400)
+                  }
+                  this.player.anims.play('cronchMirror',true);
+                }
+                else
                 {
-                  this.player.anims.play('cronchMirror', true);
-                } else {
-                  this.player.anims.play('cronch', true);
+                  if(player2on1){
+                    this.initTime = this.game.getTime();
+                    this.attack1 = true;
+                    this.contact = true;
+                  }
+                  this.player.anims.play('cronch',true);
+                  //  this.player.body.setSize(180,400,true);
+                }
+              }
+              else if(this.keyQ.isUp && this.contact && this.attack1){
+                if(!this.shield2){
+                  if(this.game.getTime() - this.initTime > 20){
+                    this.attack1 = false
+                    //this.doDamage("player2", 20);
+                    let b = Math.floor(document.getElementById("health2").offsetWidth / 4)
+                    console.log(b)
+                    if(4* b - 20 <= 0) {
+                      winner = "player2"
+                      alert("Player 2 wins!")
+                      navigate("/")
+                    }
+                    document.getElementById("health2").style.width = "" + 4*b - 20 + "px"
+                    //this.forceUpdate()
+                    this.contact = false
+                    player1on2 = false
+                    player2on1 = false
+                    console.log("ATTACK STATUS: ", this.attack1)
+                    // this.player.body.setSize(180,400,true);
+                    if(this.isTurnedP1){
+                      this.isPushedP2 = true;
+                      this.player2.setVelocityX(-300);
+                      this.player2.setVelocityY(-400);
+                    }
+                    else{
+                      this.isPushedP2 = true;
+                      this.player2.setVelocityX(300);
+                      this.player2.setVelocityY(-400);
+                    }
+                  }
+                }
+                else{
+                  this.attack1 = false
+                  this.contact = false
+                  player1on2 = false
+                  player2on1 = false
                 }
               }
               else if(this.keyE.isDown)
               {
+                this.player.body.setSize(300, 400)
+
                 if(this.isTurnedP1)
-                {
+                {//SWIPE STUFF
+                  if(player2on1){
+                    this.initTime = this.game.getTime();
+                    this.attack2 = true;
+                    this.contact = true;
+                    this.player.body.setSize(300, 400)
+                  }
                   this.player.anims.play('swipeMirror',true);
                 }
+
                 else
                 {
+                  if(player2on1){
+                    this.initTime = this.game.getTime();
+                    this.attack2 = true;
+                    this.contact = true;
+                    this.player.body.setSize(300, 400)
+                  }
                   this.player.anims.play('swipe', true);
                 }
+              }
+              else if(this.keyE.isUp && this.contact && this.attack2){
+                if(!this.shield2){
+                  if(this.game.getTime() - this.initTime > 20){
+                    this.attack2 = false
+                    this.contact = false
+                    player1on2 = false
+                    player2on1 = false
+                    //this.doDamage("player2", 10);
+
+                    let b = Math.floor(document.getElementById("health2").offsetWidth / 4)
+                    console.log(b)
+                    if(4*b - 10 <= 0) {
+                      winner = "player2"
+                      alert("Player 2 wins!")
+                      navigate("/")
+                    }
+                    document.getElementById("health2").style.width = "" + 4*b - 10 + "px"
+                    //this.setState({player2Health: this.state.player2Health - 10})
+
+                    //player2Health -= 10
+                    //this.forceUpdate()
+                    this.player.body.setSize(180,400,true);
+                    if(this.isTurnedP1){
+                      this.player2.x -= 120;
+                    }
+                    else{
+                      this.player2.x += 130;
+                    }
+                  }
+                }
+                else{
+                  this.attack2 = false
+                  this.contact = false
+                  player1on2 = false
+                  player2on1 = false
+                }
+
               }
               else
               {
                 if(this.isTurnedP1)
                 {
+                  this.player.body.setSize(180,400,true);
                   this.player.anims.play('idleMirror',true);
                 }
                 else
@@ -383,25 +573,27 @@ class PvE extends Component {
 
               if(this.cursors.left.isDown)
               {
-                this.player2.x -= 4;
-                console.log("PRESSINg Right")
+                this.player2.x -= 7;
                 this.player2.anims.play('leftInverted', true);
                 this.isTurnedP2 = true;
               }
               else if(this.cursors.right.isDown)
               {
-                this.player2.x += 4;
-                console.log("PRESSINg Right")
+                this.player2.x += 7;
                 this.player2.anims.play('rightInverted', true);
                 this.isTurnedP2 = false;
               }
               else if(this.cursors.down.isDown) {
-                if (this.isTurnedP2)
+                if (this.isTurnedP2 && !this.shield2)
                 {
                   this.player2.anims.play('blockMirrorInverted', true);
-                } else {
+                } else if(!this.isTurnedP2 && !this.shield2){
                   this.player2.anims.play('blockInverted', true);
                 }
+                this.shield2 = true
+              }
+              else if(this.cursors.down.isUp && this.shield2){
+                this.shield2 = false;
               }
               else if(this.cursors.up.isDown && this.player2.body.touching.down){
                 if (this.isTurnedP2)
@@ -416,28 +608,126 @@ class PvE extends Component {
               }
               else if(this.keySPACE.isDown)
               {
+                this.player2.body.setSize(300, 400)
                 if (this.isTurnedP2)
                 {
+                  if(player1on2){
+                    this.initTime = this.game.getTime();
+                    this.attack4 = true
+                    this.contact2 = true
+                  }
                   this.player2.anims.play('cronchMirrorInverted', true);
-                } else {
+                }
+                else {
+                  if(player2on1){
+                    this.initTime = this.game.getTime();
+                    this.attack4 = true
+                    this.contact2 = true
+                  }
                   this.player2.anims.play('cronchInverted', true);
+                }
+              }
+              else if(this.keySPACE.isUp && this.contact2 && this.attack4){
+                if(!this.shield1){
+                  this.attack4 = false;
+                  this.contact2 = false;
+                  player1on2 = false
+                  player2on1 = false
+                  //this.doDamage("player1", 20);
+                  let b = Math.floor(document.getElementById("health1").offsetWidth / 4)
+                  console.log(b)
+                  if(4* b - 20 <= 0) {
+                    winner = "player1"
+                    alert("Player 1 wins!")
+                    navigate("/")
+                  }
+                  document.getElementById("health1").style.width = "" + 4*b - 20 + "px"
+
+                  //this.forceUpdate()
+                  if(this.isTurnedP2){
+                    this.isPushedP1 = true;
+                    this.player.setVelocityX(-300);
+                    this.player.setVelocityY(-400);
+                  }
+                  else{
+                    this.isPushedP1 = true;
+                    this.player.setVelocityX(300);
+                    this.player.setVelocityY(-400);
+                  }
+                }
+                else{
+                  this.attack4 = false;
+                  this.contact2 = false;
+                  player1on2 = false
+                  player2on1 = false
                 }
               }
               else if(this.keyENTER.isDown)
               {
+                this.player2.body.setSize(300, 400)
                 if(this.isTurnedP2)
-                {
+                {//SWIPE STUFF P2
+                  if(player1on2){
+                    this.initTime = this.game.getTime();
+                    this.attack3 = true;
+                    this.contact2 = true;
+                    this.player2.body.setSize(300, 400)
+                  }
                   this.player2.anims.play('swipeMirrorInverted',true);
                 }
+
                 else
                 {
+                  if(player1on2){
+                    this.initTime = this.game.getTime();
+                    this.attack3 = true;
+                    this.contact2 = true;
+                    this.player2.body.setSize(300, 400)
+                  }
                   this.player2.anims.play('swipeInverted', true);
+                }
+              }
+              else if(this.keyENTER.isUp && this.contact2 && this.attack3){
+                if(!this.shield1){
+                  if(this.game.getTime() - this.initTime > 20){
+                    this.attack3 = false
+                    this.contact2 = false
+                    //this.doDamage("player1", 10);
+                    let b = Math.floor(document.getElementById("health1").offsetWidth / 4)
+                    console.log(b)
+                    if(4*b - 10 <= 0) {
+                      winner = "player1"
+                      alert("Player 1 wins!")
+                      navigate("/")
+                    }
+                    document.getElementById("health1").style.width = "" + 4*b - 10 + "px"
+
+                    //player1Health -= 10
+                    //this.forceUpdate()
+                    player1on2 = false
+                    player2on1 = false
+                    this.player2.body.setSize(180,400,true);
+                    if(this.isTurnedP2){
+                      this.player.x -= 120;
+                    }
+                    else{
+                      this.player.x += 130;
+                    }
+                  }
+
+                }
+                else{
+                  this.attack3 = false
+                  this.contact2 = false
+                  player1on2 = false
+                  player2on1 = false
                 }
               }
               else
               {
                 if(this.isTurnedP2)
                 {
+                  this.player2.body.setSize(180,400,true);
                   this.player2.anims.play('idleMirrorInverted',true);
                 }
                 else
@@ -451,28 +741,31 @@ class PvE extends Component {
         },
       }
     }
+    this.forceUpdate()
 
   }
 
 
   render() {
-    const { initialize, game } = this.state
-    console.log('Last')
+    const { initialize, game } = this.bait
     return (
       <>
-        <div className="healthbar" style={{ position: "absolute", width: "400px", height: "50px"
-        }}>
-        </div>
-        <div className="health" style={{ position: "absolute", width: "300px", height: "50px"}}>
-        </div>
+        <div className="player1">Player 1</div>
+        <NewHealthBar health = {this.state.player1Health} class1={"1"}/>
+
+        <div className="player2">Player 2</div>
+        <NewHealthBar health = {this.state.player2Health} class1={"2"}/>
+
+
         <IonPhaser game={game} initialize={initialize} style={{    marginBottom: "-4px",
           overflow: "hidden"}} />
       </>
 
     )
   }
-
-
 }
 
 export default PvE;
+// <div className="healthbar2" style={{ position: "absolute", width: "400px", height: "50px" }}>          </div>
+//
+// <div className="health2" style={{ position: "absolute", width: (player2Health)*4, height: "50px"}}>
