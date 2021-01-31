@@ -6,6 +6,7 @@ import BertoChomp from './assets/bite2inverted.gif'
 import Popup from './PopUp';
 import "./HomePage.css"
 import styled from 'styled-components';
+import { navigate } from "@reach/router";
 //import HomeMusic from './assets/HomeMusic.mp3';
 
 
@@ -60,7 +61,7 @@ class HomePage extends Component {
         <img className = "title-base" src ={title} alt = "title"/>
         <img className = "AlbertChomp" src ={AlbertChomp} alt = "AlbertChomp"/>
         <img className = "BertoChomp" src ={BertoChomp} alt = "BertoChomp"/>
-        <Button  onClick={this.playAudio} className = "PButton">
+        <Button  onClick={() => {navigate("/PvE")}} className = "PButton">
             Play
           </Button>
           <Button onClick={this.togglePopup.bind(this)} className = "HButton">
