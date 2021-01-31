@@ -4,6 +4,12 @@ import {IonPhaser} from "@ion-phaser/react";
 
 import "./PvE.css";
 
+
+let player1Health = 100;
+let player2Health = 100;
+
+let winner = null;
+
 class PvE extends Component {
   player;
   isTurned = false;
@@ -233,16 +239,38 @@ class PvE extends Component {
   }
 
 
+  doDamage = (player, dmg) => {
+    if(player == "player1") {
+      player1Health -= dmg
+      if(player1Health <= 0) {
+        winner = "player1"
+      }
+    } else {
+      player2Health -= dmg
+      if(player2Health <= 0) {
+        winner = "player2"
+      }
+    }
+  }
+
+
   render() {
     const { initialize, game } = this.state
     console.log('Last')
     return (
       <>
-        <div className="healthbar" style={{ position: "absolute", width: "400px", height: "50px"
-        }}>
+        <div className="player1">Player 1</div>
+        <div className="healthbar1" style={{ position: "absolute", width: "400px", height: "50px" }}>
         </div>
-        <div className="health" style={{ position: "absolute", width: "300px", height: "50px"}}>
+        <div className="health1" style={{ position: "absolute", width: (player1Health - 50)*4, height: "50px"}}>
         </div>
+
+        <div className="player2">Player 2</div>
+        <div className="healthbar2" style={{ position: "absolute", width: "400px", height: "50px" }}>          </div>
+
+        <div className="health2" style={{ position: "absolute", width: (player2Health - 20)*4, height: "50px"}}>
+
+          </div>
         <IonPhaser game={game} initialize={initialize} style={{    marginBottom: "-4px",
           overflow: "hidden"}} />
           </>

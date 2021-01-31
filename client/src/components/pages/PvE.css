@@ -1,16 +1,54 @@
 
-
-.healthbar {
+.player1 {
     left: 25px;
-    top: 50px;
+    top: 33px;
+    position: absolute;
+    background-color: rgb(143 158 147 / 50%);
+    z-index: 45;
+    font-size: 40px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+
+.player2 {
+    right: 25px;
+    top: 33px;
+    position: absolute;
+    background-color: rgb(143 158 147 / 50%);
+    z-index: 45;
+    font-size: 40px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.healthbar1 {
+    left: 25px;
+    top: 80px;
     position: absolute;
     background: gray;
     z-index: 30;
 }
 
-.health {
+.health1 {
     left: 25px;
-    top: 50px;
+    top: 80px;
+    position: absolute;
+    background: green;
+    z-index: 40;
+}
+
+.healthbar2 {
+    right: 25px;
+    top: 80px;
+    position: absolute;
+    background: gray;
+    z-index: 30;
+}
+
+.health2 {
+    right: 25px;
+    top: 80px;
     position: absolute;
     background: green;
     z-index: 40;
