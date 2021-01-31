@@ -7,6 +7,7 @@ import "./PvE.css";
 class PvE extends Component {
   player;
   isTurned = false;
+  platform;
   constructor(props) {
     super(props);
 
@@ -27,13 +28,14 @@ class PvE extends Component {
           init:
             function() {
               this.cameras.main.setBackgroundColor('#24252A')
-
             },
           preload: function() {
             console.log("first")
             this.load.image('marston', "./background2saturation.png")
             this.load.image('albert', "./walk1.png")
             this.load.image('ground', "./ground.png")
+            this.load.image('platform', "./ground2.png")
+
             this.load.spritesheet('gatorWalkRight',"./walkv4.png", {frameWidth: 400, frameHeight: 400} )
             this.load.spritesheet('gatorWalkLeft',"./walkmirrorr.png", {frameWidth: 400, frameHeight: 400} )
 
@@ -49,6 +51,11 @@ class PvE extends Component {
             this.load.spritesheet('gatorBlock', "./blockv4.png",{frameWidth: 400, frameHeight: 400})
             this.load.spritesheet('gatorBlockMirror', "./blocokedlong mirror.png",{frameWidth: 400, frameHeight: 400})
 
+            this.load.spritesheet('gatorJump', "./jumpvf.png",{frameWidth: 400, frameHeight: 400})
+            this.load.spritesheet('gatorJumpMirror', "./jumpmirror.png",{frameWidth: 400, frameHeight: 400})
+
+
+
 
           },
           create:function() {
@@ -59,19 +66,21 @@ class PvE extends Component {
             this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
             this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-
             let windowWidth = window.innerWidth;
             let windowHeight = window.innerHeight;
+            this.platform = this.physics.add.staticGroup();
             this.bg = this.add.image(windowWidth / 2, windowHeight / 2, 'marston');
             this.bg.setDisplaySize(windowWidth,  windowHeight);
             this.add.sprite(windowWidth / 2, windowHeight - 250, "ground");
 
-            this.player = this.physics.add.sprite(160,windowHeight - 200, 'albert');
-            this.player.body.setSize(180,350,0);
+            this.player = this.physics.add.sprite(160,windowHeight - 250, 'albert');
 
             this.player.setBounce(0.2);
             this.player.setCollideWorldBounds(true);
+            this.player.body.setGravity(0, 400);
+            this.platform.create(windowWidth/2, windowHeight - 50, 'platform');
 
+            this.physics.add.collider(this.player,this.platform);
 
             this.anims.create({
               key: 'right',
@@ -123,7 +132,7 @@ class PvE extends Component {
             })
             this.anims.create({
               key: 'block',
-              frames: this.anims.generateFrameNumbers('gatorBlock', {start:0, end: 4}),
+              frames: this.anims.generateFrameNumbers('gatorBlock', {start:0, end: 7}),
               frameRate: 10,
               repeat: 0
             })
@@ -133,11 +142,22 @@ class PvE extends Component {
               frameRate: 10,
               repeat: 0
             })
+            this.anims.create({
+              key: 'jump',
+              frames: this.anims.generateFrameNumbers('gatorJump', {start:0, end: 4}),
+              frameRate: 10,
+              repeat: 0
+            })
+            this.anims.create({
+              key: 'jumpMirror',
+              frames: this.anims.generateFrameNumbers('gatorJumpMirror', {start:0, end: 4}),
+              frameRate: 10,
+              repeat: 0
+            })
           },
           update:
             function() {
               if(this.keyD.isDown){
-                this.player.body.setSize(180,350,false);
                 this.player.x += 4;
                 console.log("PRESSINg Right")
                 this.player.anims.play('right', true);
@@ -149,7 +169,6 @@ class PvE extends Component {
                 console.log("PRESSINg Right")
                 this.player.anims.play('left', true);
                 this.isTurned = true;
-                this.player.body.setSize(180,350,true);
 
               }
               else if(this.keyS.isDown) {
@@ -160,9 +179,17 @@ class PvE extends Component {
                   this.player.anims.play('block', true);
                 }
               }
-              else if(this.keyW.isDown){
-                this.player.y -= 4;
-                console.log("PRESSINg Right")
+              else if(this.keyW.isDown && this.player.body.touching.down){
+                  if (this.isTurned)
+                  {
+                    this.player.anims.play('jumpMirror', true);
+
+                  }
+                  else {
+                    this.player.anims.play('jump', true);
+                  }
+                  this.player.setVelocityY(-300);
+
               }
               else if(this.keyQ.isDown)
               {
@@ -189,11 +216,10 @@ class PvE extends Component {
                 if(this.isTurned)
                 {
                   this.player.anims.play('idleMirror',true);
-                  this.player.body.setSize(180,350,true);
                 }
                 else
                 {
-                  this.player.body.setSize(180,350,false);
+                  this.player.body.setSize(180,400,true);
                   this.player.anims.play('idle',true);
                 }
               }
