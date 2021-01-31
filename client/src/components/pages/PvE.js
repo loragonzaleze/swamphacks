@@ -36,10 +36,11 @@ class PvE extends Component {
             this.load.image('ground', "./ground.png")
             this.load.spritesheet('gatorWalkRight',"./walkv4.png", {frameWidth: 400, frameHeight: 400} )
             this.load.spritesheet('gatorWalkLeft',"./walk mirrorFinal.png", {frameWidth: 400, frameHeight: 330} )
-            this.load.spritesheet('gatorWalkIdle',"./idle.png", {frameWidth: 400, frameHeight: 350})
+            this.load.spritesheet('gatorWalkIdle',"./idlv4.png", {frameWidth: 400, frameHeight: 400})
             this.load.spritesheet('gatorWalkIdleMirror',"./idle mirror.png", {frameWidth: 400, frameHeight: 370})
-            this.load.spritesheet('gatorCronch', "./cronch.png", {frameWidth: 395, frameHeight:350})
-            this.load.spritesheet('gatorSwipe', "./swipper.png", {frameWidth: 386, frameHeight:350})
+            this.load.spritesheet('gatorCronch', "./bnitev4.png", {frameWidth: 400, frameHeight:400})
+            this.load.spritesheet('gatorSwipe', "./swipev4.png", {frameWidth: 400, frameHeight:400})
+            this.load.spritesheet('gatorBlock', "./blockv4.png",{frameWidth: 400, frameHeight: 400});
           },
           create:function() {
             this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
@@ -56,7 +57,7 @@ class PvE extends Component {
             this.bg.setDisplaySize(windowWidth,  windowHeight);
             this.add.sprite(windowWidth / 2, windowHeight - 250, "ground");
 
-            this.player = this.physics.add.sprite(160,windowHeight - 160, 'albert');
+            this.player = this.physics.add.sprite(160,windowHeight - 200, 'albert');
             this.player.body.setSize(180,350,0);
 
             this.player.setBounce(0.2);
@@ -99,6 +100,12 @@ class PvE extends Component {
               frameRate: 10,
               repeat: 0
             })
+            this.anims.create({
+              key: 'block',
+              frames: this.anims.generateFrameNumbers('gatorBlock', {start:0, end: 4}),
+              frameRate: 10,
+              repeat: 0
+            })
 
 
 
@@ -123,8 +130,7 @@ class PvE extends Component {
 
               }
               else if(this.keyS.isDown){
-                this.player.y += 4;
-                console.log("PRESSINg Right")
+                this.player.anims.play('block', true);
               }
               else if(this.keyW.isDown){
                 this.player.y -= 4;
