@@ -19,29 +19,29 @@
      width: 20%;
      height:auto;
      position: absolute;
-     top: 46%;
-     left: 5%;
+     bottom: 75px;
+     left: 20px;
  }
  .BertoChomp{
      width: 20%;
      height:auto;
      position: absolute;
-     top: 46%;
-     left: 76%;
+     bottom: 75px;
+     right: 20px;
  }
 .HButton
 {
     height: auto;
     position: absolute;
-    top: 85%;
-    left: 85%;
+    bottom: 60px;
+    right: 48px;
 }
  .Creators
  {
      height: auto;
      position: absolute;
-     top: 85%;
-     left: 5%;
+     bottom: 60px;
+     left: 48px;
  }
 .PButton
 {
