@@ -20,31 +20,62 @@
      height:auto;
      position: absolute;
      bottom: 75px;
-     left: 20px;
+     left: 100px;
+ }
+ .AlbertTitle{
+     width: 9%;
+     height:auto;
+     position: absolute;
+     bottom: 360px;
+     left: 150px;
+ }
+ .container1
+ {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
  }
  .BertoChomp{
      width: 20%;
      height:auto;
      position: absolute;
      bottom: 75px;
-     right: 20px;
+     right: 100px;
+ }
+ .BertoTitle{
+     width: 17%;
+     height:auto;
+     position: absolute;
+     bottom: 360px;
+     right: 80px;
+ }
+ .container2
+ {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
  }
 .HButton
 {
     height: auto;
+    width: 100%;
     position: absolute;
     bottom: 60px;
-    right: 48px;
+    right: 120px;
 }
  .Creators
  {
-     height: auto;
+     width: 100%;
      position: absolute;
      bottom: 60px;
-     left: 48px;
+     left: 120px;
  }
 .PButton
 {
+    height: auto;
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 47.5%;

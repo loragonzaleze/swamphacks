@@ -4,6 +4,8 @@ import title from './assets/rits.png'
 import AlbertChomp from './assets/bite2.gif'
 import BertoChomp from './assets/bite2inverted.gif'
 import Popup from './PopUp';
+import AlbertTitle from './assets/albert.png'
+import BertoTitle from './assets/invertbert.png';
 import "./HomePage.css"
 import styled from 'styled-components';
 import { navigate } from "@reach/router";
@@ -56,11 +58,6 @@ class HomePage extends Component {
 
   }
 
-  playAudio() {
-    const audioEl = document.getElementsByClassName("audio-element")[0];
-    audioEl.play();
-    audioEl.loop = true;
-  }
 
 
 
@@ -68,12 +65,18 @@ class HomePage extends Component {
     return (
       <div className="homepage-base" style={{ backgroundImage: `url(${background})` }}>
         <img className = "title-base" src ={title} alt = "title"/>
+        <div className = "container1">
         <img className = "AlbertChomp" src ={AlbertChomp} alt = "AlbertChomp"/>
+        <img className = "AlbertTitle" src ={AlbertTitle} alt = "AlbertTitle"/>
+        </div>
+        <div className = "container2">
         <img className = "BertoChomp" src ={BertoChomp} alt = "BertoChomp"/>
+        <img className = "BertoTitle" src ={BertoTitle} alt = "BertoTitle"/>
+        </div>
         <Button  onClick={() => {navigate("/PvPBruce")}} className = "PButton">
             Play
           </Button>
-          <Button onClick={this.togglePopup.bind(this)} className = "HButton">
+          <Button onClick = {this.togglePopup.bind(this)} className = "HButton">
             How To
           </Button>
         {this.state.showPopup ?
@@ -92,9 +95,6 @@ class HomePage extends Component {
           : ""
         }
 
-        <audio className="audio-element" >
-          <source src = "./assets/HomeMusic.mp3"/>
-        </audio>
       </div>
     );
   }

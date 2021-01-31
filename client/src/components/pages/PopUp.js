@@ -7,6 +7,9 @@ import Q from "./assets/Q.png";
 import E from "./assets/E.png";
 import Spacebar from "./assets/Spacebar.png";
 import Enter from "./assets/Enter.png";
+import AlbertTitle from "./assets/albert.png";
+import BertoTitle from "./assets/invertbert.png";
+
 
 const Button = styled.button `
   background-color: blue;
@@ -28,6 +31,8 @@ class Popup extends React.Component {
           <div className="popup-content">
             <h1>How to Play</h1>
           </div>
+          <img className = "AlbertTitle2" src ={AlbertTitle} alt = "AlbertTitle"/>
+          <img className = "BertoTitle2" src ={BertoTitle} alt = "BertoTitle"/>
           <div className = "BigWrapper">
           <div className = "P1">
             <h2>Player 1</h2>

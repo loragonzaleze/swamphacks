@@ -32,18 +32,27 @@ class CreatorPop extends React.Component {
             <div className = "P12">
               <img className = "Bruce" src ={Bruce} alt = "Bruce"/>
               <h2>Bruce Maddux</h2>
+              <p1>Front End: </p1>
+              <p1>Game Controls</p1>
             </div>
             <div className= "P22">
               <img className = "Edwin" src ={Edwin} alt = "Edwin"/>
               <h2>Edwin Lora</h2>
+              <p1>Front End: </p1>
+              <p1>Game Physics</p1>
             </div>
               <div className = "P3">
                 <img className = "Connor" src ={Connor} alt = "Connor"/>
                 <h2>Connor Syron</h2>
+                <p1>Front End: </p1>
+                <p1>Artwork & </p1>
+                <p1>Code Features</p1>
                 </div>
                 <div className = "P4">
                   <img className = "Samir" src ={Samir} alt = "Samir"/>
                   <h2>Samir Ziad</h2>
+                  <p1>Front End: </p1>
+                  <p1>UI</p1>
                   </div>
           </div>
           <Button className = "PopB2" onClick={this.props.closePopup}>close</Button>
